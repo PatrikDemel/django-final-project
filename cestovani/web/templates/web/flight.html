@@ -1,35 +1,52 @@
 {% extends "web/layout.html" %} {% block body %}
-
-<section id="flight-section">
-  <h2 class="heading-2 text-center">Let {{flight.code}}</h2>
-
-  <ul id="flight-details">
-    <li class="flight-details-flight">
-      <span class="bold-text">Země odletu: </span>{{flight.departure}}
-    </li>
-    <li class="flight-details-flight">
-      <span class="bold-text">Země příletu: </span>{{flight.arrival}}
-    </li>
-    <li class="flight-details-flight">
-      <span class="bold-text">Datum odletu: </span
-      >{{flight.departure_date|date:'d.m.Y H:i'}}
-    </li>
-    <li class="flight-details-flight">
-      <span class="bold-text">Datum příletu: </span
-      >{{flight.arrival_date|date:'d.m.Y H:i'}}
-    </li>
-  </ul>
+<h2 class="heading-2 text-center">Let {{flight.code}}</h2>
+<section id="web-flight">
+  <div id="flight-details" class="web-flight-div">
+    <ul id="flight-details-list">
+      <li class="flight-details-flight">
+        <span class="bold-text">Země odletu: </span>{{flight.departure}}
+      </li>
+      <li class="flight-details-flight">
+        <span class="bold-text">Země příletu: </span>{{flight.arrival}}
+      </li>
+      <li class="flight-details-flight">
+        <span class="bold-text">Datum odletu: </span
+        >{{flight.departure_date|date:'d.m.Y H:i'}}
+      </li>
+      <li class="flight-details-flight">
+        <span class="bold-text">Datum příletu: </span
+        >{{flight.arrival_date|date:'d.m.Y H:i'}}
+      </li>
+    </ul>
+  </div>
+  <div id="passangers" class="web-flight-div">
+    <h3 class="heading-3">Pasažéři</h3>
+    <ul id="passangers-list">
+      {% for passanger in passanger %}
+      <li class="passangers-list-passanger">{{passanger}}</li>
+      {% empty %}
+      <li class="passangers-list-passanger">Nebyli nalezeni žádní pasažéři</li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
-<section id="passangers-section">
-  <h2 class="heading-2 text-center">Pasažéři</h2>
-  <ul id="passangers-list">
-    {% for passanger in passanger %}
-    <li class="passangers-list-passanger">{{passanger}}</li>
-    {% empty %}
-    <li class="passangers-list-passanger">Nebyly nalezeni žádní pasažéři</li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'index' %}" class="btn">Vrátit se zpět</a>
+<section id="add-passanger">
+  <h2 class="heading-2 text-center">Přidat pasažéra</h2>
+  <form
+    action="{% url 'book' flight_code %}"
+    id="add-passanger-form"
+    method="POST">
+    {% csrf_token %}
+    <select name="passanger">
+      {% for passanger in none_passanger %}
+      <option value="{{ passanger.id }}">{{ passanger }}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" class="btn" value="Přidat" />
+  </form>
 </section>
+<div id="button-div">
+  <a href="{% url 'index' %}" class="btn" id="flight-button">Vrátit se zpět</a>
+</div>
 
 {% endblock %}
