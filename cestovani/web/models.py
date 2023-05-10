@@ -16,10 +16,12 @@ class Flights(models.Model):
     code = models.CharField(max_length=5, default="00000", primary_key=True)
     departure = models.ForeignKey(
         Airports, on_delete=models.CASCADE, related_name='departure')
-    departure_date = models.DateTimeField(default=datetime.now, blank=True)
+    departure_date = models.DateTimeField(
+        default=datetime.now, blank=True)
     arrival = models.ForeignKey(
         Airports, on_delete=models.CASCADE, related_name='arrival')
-    arrival_date = models.DateTimeField(default=datetime.now, blank=True)
+    arrival_date = models.DateTimeField(
+        default=datetime.now, blank=True)
 
     def __str__(self):
         return f'{self.departure} {self.departure_date.strftime("%d.%m.%y %H:%M")} >> {self.arrival} {self.arrival_date.strftime("%d.%m.%y %H:%M")} (flight no. {self.code})'
