@@ -5,4 +5,7 @@ from .models import Flights, Airports
 
 
 def index(request):
-    return render(request, 'web/index.html')
+    return render(request, 'web/index.html', {
+        'flights': Flights.objects.all(),
+        'airports': Airports.objects.all()
+    })
