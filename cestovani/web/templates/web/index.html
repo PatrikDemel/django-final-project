@@ -149,10 +149,22 @@
     </ul>
   </div>
 </section>
-<section id="flights">
-  <div class="flights bg-dark padA-2">
-    <h2 class="heading-2 text-center">Plány letů</h2>
-  </div>
+<section id="flights" class="bg-dark padA-2">
+  <h2 class="heading-2 text-center">Plány letů</h2>
+  <ul id="flights-list">
+    {% for flight in flights%}
+    <li class="flights-list-flight text-center">
+      Flight {{flight.code}}: {{flight.departure}} >> {{flight.arrival}}
+      <a href="{%url 'flight' flight.code %}" class="list-button bg-light"
+        >Zobrazit</a
+      >
+    </li>
+    {% empty %}
+    <li class="flights-list-flight text-center">
+      Nejsou žádné lety k dispozici
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 
 {% endblock %}
