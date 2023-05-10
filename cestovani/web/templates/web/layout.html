@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Website Metadata -->
+    <meta
+      name="description"
+      content="Web o cestování, který je součástí mého projektu do předmětu Programování  a vývoj aplikací." />
+    <meta name="keywords" content="cestování, projekt" />
+    <!-- Font Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
+      rel="stylesheet" />
+    <!-- Font Awesome Import -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'web/styles.css' %}" />
+    <!-- Import Title Icon -->
+    <link rel="icon" href="./img/title-image.svg" />
+    <!-- Title -->
+    <title>Cestování | Projekt do PVA</title>
+  </head>
+
+  <body id="home">
+    <!-- Navigation Bar -->
+    <nav id="navigation_bar">
+      <div id="logo">
+        <span class="colored-text"
+          ><i class="fa-solid fa-location-dot"></i
+        ></span>
+        <a href="index.html">Cestování</a>
+      </div>
+      <a id="hamburger" href="#"> <i class="fa fa-bars fa-2x"></i></a>
+      <ul>
+        <li><a href="#home">Úvod</a></li>
+        <li><a href="#about">O mně</a></li>
+        <li><a href="#project">Projekt</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    {% block body %} {% endblock %}
+
+    <!-- Footer -->
+    <footer class="text-center pad-1">
+      <div class="container">
+        <p>&copy; 2022 Patrik Demel</p>
+      </div>
+    </footer>
+
+    <!--JQuery-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script>
+      $('#navigation_bar #hamburger').click(function () {
+        $('#navigation_bar ul').slideToggle('slow');
+      });
+
+      // Vanishing menu in less than 500px
+      window.addEventListener('resize', resizeListener);
+
+      let windowWidth = window.innerWidth;
+
+      function resizeListener() {
+        windowWidth = window.innerWidth;
+      }
+
+      if (windowWidth < 501) {
+        $('#navigation_bar ul').click(function () {
+          $('#navigation_bar ul').hide();
+        });
+      } else {
+        $('#navigation_bar ul').show();
+      }
+
+      // Position change on click
+      $('#navigation_bar a, .btn').on('click', function (event) {
+        if (this.hash !== ' ') {
+          event.preventDefault();
+          const hash = this.hash;
+          $('html, body').animate(
+            {
+              scrollTop: $(hash).offset().top - 260,
+            },
+            800
+          );
+        }
+      });
+
+      // Smooth scrolling
+      $('#navigation_bar a, .btn').on('click', function (event) {
+        if (this.hash !== '') {
+          event.preventDefault();
+          const hash = this.hash;
+          $('html, body').animate(
+            {
+              scrollTop: $(hash).offset().top - 260,
+            },
+            800
+          );
+        }
+      });
+
+      var nav_sections = $('section');
+      var main_nav = $('#navigation_bar li, .mobile-nav');
+
+      $(window).on('scroll', function () {
+        var cur_pos = $(this).scrollTop() + 200;
+
+        // Menu Opacity on scrolling and hidding source
+
+        if (cur_pos > 350) {
+          document.querySelector('#navigation_bar').style.opacity = 0.9;
+          document.querySelector('#showcase .source').style.display = 'none';
+        } else {
+          document.querySelector('#navigation_bar').style.opacity = 1;
+          document.querySelector('#showcase .source').style.display = 'block';
+        }
+
+        // Navigation active state on scroll
+
+        nav_sections.each(function () {
+          var top = $(this).offset().top,
+            bottom = top + $(this).outerHeight();
+
+          if (cur_pos >= top && cur_pos <= bottom) {
+            if (cur_pos <= bottom) {
+              main_nav.find('a').removeClass('active');
+            }
+            main_nav
+              .find('a[href="#' + $(this).attr('id') + '"]')
+              .addClass('active');
+          }
+
+          if (cur_pos < 300) {
+            $('#navigation_bar ul li a').removeClass('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
