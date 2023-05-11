@@ -8,3 +8,11 @@ from django.http import HttpResponseRedirect
 def users(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
+
+
+def login_view(request):
+    return render(request, 'users/login.html')
+
+
+def logout(request):
+    pass
