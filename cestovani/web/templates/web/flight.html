@@ -33,9 +33,9 @@
 <section id="add-passanger">
   <h2 class="heading-2 text-center">Přidat pasažéra</h2>
   <form
-    action="{% url 'book' flight_code %}"
     id="add-passanger-form"
-    method="POST">
+    method="POST"
+    action="{% url 'book' flight_code %}">
     {% csrf_token %}
     <select name="passanger">
       {% for passanger in none_passanger %}
