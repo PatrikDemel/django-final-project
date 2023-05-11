@@ -37,7 +37,7 @@
     method="POST"
     action="{% url 'book' flight.code %}">
     {% csrf_token %}
-    <select name="passanger">
+    <select name="passanger" id="select-passanger">
       {% for passanger in none_passanger %}
       <option value="{{ passanger.id }}">{{ passanger }}</option>
       {% endfor %}
@@ -46,7 +46,7 @@
   </form>
 </section>
 <div id="button-div">
-  <a href="{% url 'index' %}">Vrátit se zpět</a>
+  <a href="{% url 'index' %}" id="back-button">Vrátit se zpět</a>
 </div>
 
 {% endblock %}
