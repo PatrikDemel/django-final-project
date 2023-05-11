@@ -417,17 +417,6 @@ footer {
   gap: 1rem;
 }
 
-#add-passanger-form .btn,
-#add-passanger-form select {
-  padding: 0.5rem 1rem;
-  background-color: transparent;
-  border: 2px solid black;
-  min-width: 6rem;
-  color: black;
-  min-height: 3rem;
-  border-radius: 0%;
-}
-
 /* Footer */
 footer {
   display: flex;
