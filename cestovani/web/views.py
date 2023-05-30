@@ -21,11 +21,3 @@ def flight(request, flight_code):
         'passanger': flight.passanger.all(),
         'none_passanger': Passangers.objects.exclude(flights=flight).all()
     })
-
-
-def book(request, flight_code):
-    if request.method == "POST":
-        flight = Flights.objects.get(pk=flight_code)
-        passanger = Passangers.objects.get(pk=int(request.POST['passanger']))
-        passanger.flights.add(flight)
-        return HttpResponseRedirect(reverse('flight', args=(flight_code)))

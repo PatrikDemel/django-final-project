@@ -30,21 +30,6 @@
     </ul>
   </div>
 </section>
-<section id="add-passanger">
-  <h2 class="heading-2 text-center">Přidat pasažéra</h2>
-  <form
-    id="add-passanger-form"
-    method="POST"
-    action="{% url 'book' flight.code %}">
-    {% csrf_token %}
-    <select name="passanger" id="select-passanger">
-      {% for passanger in none_passanger %}
-      <option value="{{ passanger.id }}">{{ passanger }}</option>
-      {% endfor %}
-    </select>
-    <input type="submit" value="Přidat" />
-  </form>
-</section>
 <div id="button-div">
   <a href="{% url 'index' %}" id="back-button">Vrátit se zpět</a>
 </div>
