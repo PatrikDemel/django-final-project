@@ -1,0 +1,19 @@
+{% extends 'users/layout.html'%} {% block body %}
+<form action="{% url 'login' %}" method="post" id="login-form">
+  {% csrf_token %}
+  <input
+    class="form-input"
+    type="text"
+    name="username"
+    placeholder="username" />
+  <input
+    class="form-input"
+    type="password"
+    name="password"
+    placeholder="password" />
+  <input class="login-button" type="submit" value="login" />
+</form>
+
+{% if message %}
+<div class="error-message">{{ message }}</div>
+{% endif %} {% endblock %}
